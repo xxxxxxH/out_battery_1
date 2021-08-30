@@ -13,8 +13,8 @@
         android:scaleType="centerCrop" />
 
 
-
     <TextView
+        android:id="@+id/btn"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
@@ -25,4 +25,24 @@
         android:textAllCaps="true"
         android:textColor="@color/white"
         android:textStyle="bold|italic" />
+
+    <TextView
+        android:id="@+id/percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/white"
+        android:gravity="center"
+        android:padding="50dp"
+        android:text="current 60%"
+        android:textColor="@color/black"
+        android:textSize="20sp" />
+
+    <ImageView
+        android:id="@+id/anim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/percent"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp" />
 </RelativeLayout>
