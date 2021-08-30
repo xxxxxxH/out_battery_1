@@ -14,5 +14,7 @@ class Constant {
         const val TYPE = "type"
         const val BATTERY_CHANGED = "BATTERY_CHANGED"
         const val POWER_CONNECTED = "POWER_CONNECTED"
+        const val KEY_BG = "key_bg"
+        const val KEY_ANIM = "anim"
     }
 }

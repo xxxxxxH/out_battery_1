@@ -2,6 +2,7 @@ package net.basicmodel.adapter
 
 import android.app.Activity
 import android.content.Context
+import android.text.TextUtils
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -22,8 +23,8 @@ import net.basicmodel.utils.ScreenUtils
 class MyAdapter(
     val bg: ArrayList<String>?,
     val anim: ArrayList<String>?,
-    val context:Context,
-    val activity:Activity,
+    val context: Context,
+    val activity: Activity,
     val listener: OnItemClickListener,
     val type: String
 ) : RecyclerView.Adapter<MyAdapter.ViewHolder>() {
@@ -34,29 +35,35 @@ class MyAdapter(
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        when(type){
+        when (type) {
             Constant.TYPE_BG -> {
-                with(holder.itemView){
+                with(holder.itemView) {
                     val params = root.layoutParams
                     params.width = ScreenUtils.getScreenSize(activity)[1] / 2
+                    params.height = ScreenUtils.getScreenSize(activity)[0] / 2
                     root.layoutParams = params
 
                     val params1 = item_img.layoutParams
                     params1.width = ScreenUtils.getScreenSize(activity)[1] / 2 - 20
+                    params1.height = ScreenUtils.getScreenSize(activity)[0] / 2
                     item_img.layoutParams = params1
 
-                    Glide.with(context).load(bg!![position]).into(item_img)
+                    Glide.with(context)
+                        .load(bg!![position])
+                        .placeholder(R.mipmap.ic_launcher_round)
+                        .into(item_img)
 
                     item_img.setOnClickListener {
-                        listener.onItemClick(holder.layoutPosition,type)
+                        listener.onItemClick(holder.layoutPosition, type)
                     }
                 }
 
             }
             Constant.TYPE_ANIM -> {
-                with(holder.itemView){
+                with(holder.itemView) {
                     val params = root.layoutParams
                     params.width = ScreenUtils.getScreenSize(activity)[1] / 3
+                    params.height = ScreenUtils.getScreenSize(activity)[1] / 3
                     root.layoutParams = params
 
                     val params1 = item_img.layoutParams
@@ -64,8 +71,13 @@ class MyAdapter(
                     params1.height = ScreenUtils.getScreenSize(activity)[1] / 3 - 20
                     item_img.layoutParams = params1
 
+                    Glide.with(context)
+                        .load(anim!![position])
+                        .placeholder(R.mipmap.ic_launcher_round)
+                        .into(item_img)
+
                     item_img.setOnClickListener {
-                        listener.onItemClick(holder.layoutPosition,type)
+                        listener.onItemClick(holder.layoutPosition, type)
                     }
                 }
 
@@ -75,10 +87,14 @@ class MyAdapter(
 
     override fun getItemCount(): Int {
         var size = 0
-        if (bg != null)
-            size = bg.size
-        if (anim != null)
-            size = anim.size
+        if (TextUtils.equals(Constant.TYPE_BG, type)){
+            size = bg!!.size
+        }
+
+        if (TextUtils.equals(Constant.TYPE_ANIM, type)){
+            size = anim!!.size
+        }
+
         return size
     }
 }

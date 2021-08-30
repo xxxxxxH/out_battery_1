@@ -42,11 +42,17 @@ class SelectActivity : AppCompatActivity(), OnItemClickListener {
 
     private fun initView() {
         adapter = MyAdapter(data, data, this, this, this, type)
-        recycler.layoutManager = GridLayoutManager(this, 3)
+        var spanCount = 0
+        if (TextUtils.equals(type, Constant.TYPE_BG))
+            spanCount = 2
+        if (TextUtils.equals(type, Constant.TYPE_ANIM))
+            spanCount = 3
+        recycler.layoutManager = GridLayoutManager(this, spanCount)
         recycler.adapter = adapter
     }
 
     override fun onItemClick(position: Int, type: String) {
         EventBus.getDefault().post(MessageEvent(type, data!![position]))
+        finish()
     }
 }

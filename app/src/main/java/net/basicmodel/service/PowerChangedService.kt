@@ -7,7 +7,9 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.IBinder
+import android.widget.Toast
 import net.basicmodel.event.MessageEvent
+import net.basicmodel.utils.Constant
 import org.greenrobot.eventbus.EventBus
 
 /**
@@ -38,10 +40,10 @@ class PowerChangedService : Service() {
                     val rawLevel = intent.getIntExtra(BatteryManager.EXTRA_LEVEL, -1)
                     val percentage = rawLevel.toFloat() / scale.toFloat()
                     val level = (percentage * 100).toInt()
-                    EventBus.getDefault().post(MessageEvent("BATTERY_CHANGED",level.toString()))
+                    EventBus.getDefault().post(MessageEvent(Constant.BATTERY_CHANGED,level.toString()))
                 }
                 Intent.ACTION_POWER_CONNECTED -> {
-                    EventBus.getDefault().post(MessageEvent("POWER_CONNECTED"))
+                    EventBus.getDefault().post(MessageEvent(Constant.POWER_CONNECTED))
                 }
             }
         }
